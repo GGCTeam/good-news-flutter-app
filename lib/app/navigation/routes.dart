@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/navigation/tabs.dart';
 import 'package:good_news_flutter/app/placeholder_page.dart';
+import 'package:good_news_flutter/app/screens/news_screen.dart';
 
 enum Path {
   news_root,
@@ -24,7 +25,7 @@ class Routes {
   };
 
   static Map<String, WidgetBuilder> builders = {
-    paths[Path.news_root]: (context) => PlaceholderPage("News"),
+    paths[Path.news_root]: (context) => NewsScreen.create(context),
     paths[Path.favorites_root]
         : (context) => PlaceholderPage("Favorites"),
     paths[Path.settings_root]: (context) => PlaceholderPage("Settings"),

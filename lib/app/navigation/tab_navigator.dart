@@ -21,6 +21,7 @@ class TabNavigator extends StatelessWidget {
         return MaterialPageRoute(
           settings: RouteSettings(
             // is used to disable animation when first News screen is appeared.
+            // checking if current name of route is included to root paths.
             isInitialRoute: Routes.rootPaths.values.contains(routeSettings.name),
           ),
           builder: (context) => Routes.builders[routeSettings.name](context),
