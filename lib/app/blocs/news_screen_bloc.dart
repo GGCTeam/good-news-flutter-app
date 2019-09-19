@@ -15,7 +15,8 @@ class NewsScreenBloc {
   Future<void> get() async {
     try {
       // TODO move it to separate file API
-      Response<List<dynamic>> resp = await Dio().get<List<dynamic>>("https://api.good-news.ggc.team/v1/news/");
+      Response<List<dynamic>> resp = await Dio()
+          .get<List<dynamic>>("https://api.good-news.ggc.team/v1/news/");
 
       List<News> _news = [];
       for (dynamic _n in resp.data) {
@@ -24,11 +25,8 @@ class NewsScreenBloc {
 
       updateWith(news: _news);
     } catch (e) {
-      print(e.toString());
-      updateWith(
-        news: [],
-      );
-      rethrow;
+      updateWithError(error: e);
+      // rethrow;
     }
   }
 
@@ -38,6 +36,12 @@ class NewsScreenBloc {
     _news = news;
 
     _newsController.add(_news);
+  }
+
+  void updateWithError({
+    Object error,
+  }) {
+    _newsController.addError(error);
   }
 
   void dispose() {

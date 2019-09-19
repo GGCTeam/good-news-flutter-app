@@ -9,15 +9,10 @@ class TabNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("${Routes.rootPaths[tabItem]} -- ${Tabs.navigatorKeys[tabItem]}");
     return Navigator(
       key: Tabs.navigatorKeys[tabItem],
       initialRoute: Routes.rootPaths[tabItem],
       onGenerateRoute: (routeSettings) {
-
-        print(routeSettings.name);
-        print(routeSettings.isInitialRoute);
-
         return MaterialPageRoute(
           settings: RouteSettings(
             // is used to disable animation when first News screen is appeared.
