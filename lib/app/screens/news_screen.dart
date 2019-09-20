@@ -6,6 +6,7 @@ import 'package:good_news_flutter/app/common/news_list_item.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:good_news_flutter/app/navigation/routes.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class NewsScreen extends StatelessWidget {
   const NewsScreen({Key key, this.bloc}) : super(key: key);
@@ -57,6 +58,7 @@ class NewsScreen extends StatelessWidget {
               );
             }, // TODO
             onBookmarkTap: (news) => print(news.title), // TODO
+            onShareTap: (news) => Share.share(news.link),
           ),
           onLoadData: bloc.get,
         );

@@ -10,17 +10,24 @@ class NewsListItem extends StatelessWidget {
     @required this.model,
     @required this.onTap,
     @required this.onBookmarkTap,
+    @required this.onShareTap,
   }) : super(key: key);
 
   final News model;
   final ValueChanged<News> onTap;
   final ValueChanged<News> onBookmarkTap;
+  final ValueChanged<News> onShareTap;
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       secondaryActions: <Widget>[
+        IconSlideAction(
+          color: Colors.indigo,
+          icon: Icons.share,
+          onTap: () => onShareTap(model),
+        ),
         IconSlideAction(
           color: Colors.amber,
           icon: Icons.star_border,
