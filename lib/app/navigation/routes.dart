@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/navigation/tabs.dart';
 import 'package:good_news_flutter/app/placeholder_page.dart';
+import 'package:good_news_flutter/app/screens/bookmarks_screen.dart';
 import 'package:good_news_flutter/app/screens/news_open_screen.dart';
 import 'package:good_news_flutter/app/screens/news_screen.dart';
 
@@ -39,7 +40,7 @@ class Routes {
       settings: RouteSettings(
         isInitialRoute: true,
       ),
-      builder: (context) => PlaceholderPage("Bookmarks"),
+      builder: (context) => BookmarksScreen.create(context),
     ),
 
     paths[Path.settings_root]: (context, _) => MaterialPageRoute(

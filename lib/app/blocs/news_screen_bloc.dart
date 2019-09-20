@@ -1,11 +1,20 @@
 import 'dart:async';
-import 'package:good_news_flutter/app/data/constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:good_news_flutter/app/data/api_service.dart';
+import 'package:good_news_flutter/app/data/storage_service.dart';
 import 'package:good_news_flutter/app/models/News.dart';
-import 'package:dio/dio.dart';
 
 class NewsScreenBloc {
-  // final ApiService api; // TODO
-  // final StorageService storage; // TODO
+  NewsScreenBloc({
+    @required this.api,
+    @required this.storage,
+  }) {
+    // TODO add data listener to news bookmarks storage
+    // storage.news.stream.listen((news) { print("\n\nFROM NewsScreenBloc: \n\n"); print(news); });
+  }
+
+  final ApiService api;
+  final StorageService storage; // TODO
 
   final StreamController<List<News>> _newsController =
       StreamController<List<News>>();
@@ -13,19 +22,12 @@ class NewsScreenBloc {
   Stream<List<News>> get newsStream => _newsController.stream;
   List<News> _news = [];
 
-  NewsScreenBloc() {
-    // TODO add data listener to news bookmarks storage
-  }
-
   Future<void> get() async {
     try {
-      // TODO move it to separate file API
-      Response<List<dynamic>> resp = await Dio()
-          .get<List<dynamic>>("${Constants.baseUrl}/v1/news/");
+      final news = await api.getNews();
 
-      List<News> _news = resp.data.map((n) => News.fromMap(n)).toList();
-
-      updateWith(news: _news);
+      storage.news.save(news);
+      updateWith(news: news);
     } catch (e) {
       updateWithError(error: e);
       // rethrow;
