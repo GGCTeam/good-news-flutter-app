@@ -30,6 +30,8 @@ class ListItemsBuilder<T> extends StatelessWidget {
       return EmptyContent(
         title: "Something went wrong",
         message: "Can't load items right now",
+        showRefreshButton: true,
+        onRefreshPressed: onLoadData,
       );
     }
 

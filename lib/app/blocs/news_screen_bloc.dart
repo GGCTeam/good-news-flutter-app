@@ -13,6 +13,10 @@ class NewsScreenBloc {
   Stream<List<News>> get newsStream => _newsController.stream;
   List<News> _news = [];
 
+  NewsScreenBloc() {
+    // TODO add data listener to news bookmarks storage
+  }
+
   Future<void> get() async {
     try {
       // TODO move it to separate file API

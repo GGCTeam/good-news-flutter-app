@@ -23,20 +23,21 @@ class NewsScreen extends StatelessWidget {
     );
   }
 
+  Future<Null> _refresh() async {
+    return await bloc.get();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('News'),
         elevation: Platform.isIOS ? 0 : 4,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: bloc.get,
-          )
-        ],
       ),
-      body: _buildContents(context),
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        child: _buildContents(context),
+      ),
     );
   }
 

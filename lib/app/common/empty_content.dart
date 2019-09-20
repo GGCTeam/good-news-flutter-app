@@ -5,10 +5,14 @@ class EmptyContent extends StatelessWidget {
     Key key,
     this.title = 'Nothing here',
     this.message = 'Update the page',
+    this.showRefreshButton = false,
+    this.onRefreshPressed,
   }) : super(key: key);
 
   final String title;
   final String message;
+  final bool showRefreshButton;
+  final VoidCallback onRefreshPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,14 @@ class EmptyContent extends StatelessWidget {
           Text(
             message,
             style: TextStyle(fontSize: 16, color: Colors.black54),
-          )
+          ),
+          if (showRefreshButton && onRefreshPressed != null)
+            IconButton(
+              iconSize: 44,
+              color: Colors.green,
+              icon: Icon(Icons.refresh),
+              onPressed: onRefreshPressed,
+            )
         ],
       ),
     );
