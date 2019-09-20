@@ -22,11 +22,7 @@ class NewsSource {
     final String imageUrl = data["image_url"];
     final List<dynamic> _types = data["types"];
 
-    final List<NewsType> types = [];
-
-    for (dynamic _type in _types) {
-      types.add(NewsType.fromMap(_type));
-    }
+    final List<NewsType> types = _types.map((t) => NewsType.fromMap(t)).toList();
 
     return NewsSource(
       id: id,
@@ -37,17 +33,13 @@ class NewsSource {
   }
 
   Map<String, dynamic> toMap() {
-    final List<dynamic> types = [];
-
-    for (NewsType type in this.types) {
-      types.add(type.toMap());
-    }
+    final List<dynamic> _types = types.map((t) => t.toMap()).toList();
 
     return {
       "_id": id,
       "name": name,
       "image_url": imageUrl,
-      "types": types,
+      "types": _types,
     };
   }
 }

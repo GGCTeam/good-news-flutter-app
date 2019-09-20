@@ -23,10 +23,7 @@ class NewsScreenBloc {
       Response<List<dynamic>> resp = await Dio()
           .get<List<dynamic>>("${Constants.baseUrl}/v1/news/");
 
-      List<News> _news = [];
-      for (dynamic _n in resp.data) {
-        _news.add(News.fromMap(_n));
-      }
+      List<News> _news = resp.data.map((n) => News.fromMap(n)).toList();
 
       updateWith(news: _news);
     } catch (e) {
