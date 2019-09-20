@@ -34,6 +34,10 @@ class NewsScreenBloc {
     }
   }
 
+  void addToBookmarks(News bookmark) {
+    storage.bookmarks.add(bookmark);
+  }
+
   void updateWith({
     List<News> news,
   }) {

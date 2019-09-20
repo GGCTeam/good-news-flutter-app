@@ -10,7 +10,7 @@ class BookmarksScreenBloc {
     // here we create listener to storage,
     // so when we receive new values,
     // we update UI state through the BLoC
-    storage.news.stream.listen((bookmarks) => this.updateWith(bookmarks: bookmarks));
+    storage.bookmarks.stream.listen((bookmarks) => this.updateWith(bookmarks: bookmarks));
   }
 
   final StorageService storage;

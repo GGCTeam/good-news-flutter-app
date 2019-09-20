@@ -63,7 +63,7 @@ class NewsScreen extends StatelessWidget {
                 ),
               );
             }, // TODO
-            onBookmarkTap: (news) => print(news.title), // TODO
+            onBookmarkTap: (news) => bloc.addToBookmarks(news),
             onShareTap: (news) => Share.share(news.link),
           ),
           onLoadData: bloc.get,

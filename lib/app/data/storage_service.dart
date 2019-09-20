@@ -7,6 +7,7 @@ import 'package:rxdart/subjects.dart';
 // NOTE: might be better to separate this class to different classes
 class StorageService {
   NewsStorage news = NewsStorage();
+  BookmarksStorage bookmarks = BookmarksStorage();
 //  List<News> news = [];
 //  List<News> bookmarks = []; // cached
 //  // TODO вместо верхнего будет просто bookmarksStorage типа  того
@@ -36,14 +37,24 @@ class NewsStorage {
   }
 }
 
-//class BookmarksStorage {
-//  List<News> bookmarks = [];
-//
-//  BehaviorSubject stream = new BehaviorSubject<List<News>>();
-//
-//
-//
-//  void dispose() {
-//    stream.close();
-//  }
-//}
+class BookmarksStorage {
+  BookmarksStorage() {
+    stream.add(_bookmarks);
+  }
+
+  List<News> _bookmarks = [];
+
+  BehaviorSubject stream = new BehaviorSubject<List<News>>();
+
+  void add(News bookmark) {
+    _bookmarks.insert(0, bookmark); // adding to the beginning of the list
+
+    // TODO save to the actual local_storage
+
+    stream.add(_bookmarks);
+  }
+
+  void dispose() {
+    stream.close();
+  }
+}
