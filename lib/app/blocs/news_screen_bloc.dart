@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:good_news_flutter/app/data/constants.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:dio/dio.dart';
 
@@ -16,7 +17,7 @@ class NewsScreenBloc {
     try {
       // TODO move it to separate file API
       Response<List<dynamic>> resp = await Dio()
-          .get<List<dynamic>>("https://api.good-news.ggc.team/v1/news/");
+          .get<List<dynamic>>("${Constants.baseUrl}/v1/news/");
 
       List<News> _news = [];
       for (dynamic _n in resp.data) {

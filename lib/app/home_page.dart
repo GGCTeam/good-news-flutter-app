@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.news),
-          _buildOffstageNavigator(TabItem.favorites),
+          _buildOffstageNavigator(TabItem.bookmarks),
           _buildOffstageNavigator(TabItem.settings),
         ]),
         bottomNavigationBar: BottomNavigation(

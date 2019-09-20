@@ -5,7 +5,7 @@ import 'package:good_news_flutter/app/screens/news_screen.dart';
 
 enum Path {
   news_root,
-  favorites_root,
+  bookmarks_root,
   settings_root,
   news_open,
 }
@@ -13,21 +13,21 @@ enum Path {
 class Routes {
   static Map<Path, String> paths = {
     Path.news_root: 'news',
-    Path.favorites_root: 'favorites',
+    Path.bookmarks_root: 'bookmarks',
     Path.settings_root: 'settings',
     Path.news_open: 'news_open',
   };
 
   static Map<TabItem, String> rootPaths = {
     TabItem.news: paths[Path.news_root],
-    TabItem.favorites: paths[Path.favorites_root],
+    TabItem.bookmarks: paths[Path.bookmarks_root],
     TabItem.settings: paths[Path.settings_root],
   };
 
   static Map<String, WidgetBuilder> builders = {
     paths[Path.news_root]: (context) => NewsScreen.create(context),
-    paths[Path.favorites_root]
-        : (context) => PlaceholderPage("Favorites"),
+    paths[Path.bookmarks_root]
+        : (context) => PlaceholderPage("Bookmarks"),
     paths[Path.settings_root]: (context) => PlaceholderPage("Settings"),
     paths[Path.news_open]: (context) => PlaceholderPage("News Open"),
   };

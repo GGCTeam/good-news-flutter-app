@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/blocs/news_screen_bloc.dart';
 import 'package:good_news_flutter/app/common/list_items_builder.dart';
+import 'package:good_news_flutter/app/common/news_list_item.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +19,6 @@ class NewsScreen extends StatelessWidget {
       ),
       dispose: (context, bloc) => bloc.dispose(),
     );
-  }
-
-  Future<void> _refresh() async {
-    return await bloc.get();
-    // return await Future<Null>.value(null);
   }
 
   @override
@@ -48,8 +44,10 @@ class NewsScreen extends StatelessWidget {
       builder: (context, snapshot) {
         return ListItemsBuilder<News>(
           snapshot: snapshot,
-          itemBuilder: (context, news) => ListTile(
-            title: Text(news.title),
+          itemBuilder: (context, news) => NewsListItem(
+            model: news,
+            onTap: (news) => print(news.title), // TODO
+            onBookmarkTap: (news) => print(news.title), // TODO
           ),
           onLoadData: bloc.get,
         );

@@ -13,7 +13,7 @@ class BottomNavigation extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: [
         _buildItem(tabItem: TabItem.news),
-        _buildItem(tabItem: TabItem.favorites),
+        _buildItem(tabItem: TabItem.bookmarks),
         _buildItem(tabItem: TabItem.settings),
       ],
       onTap: (index) => onSelectTab(
