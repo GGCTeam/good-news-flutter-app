@@ -28,7 +28,7 @@ class _PlaceholderPageState extends State<PlaceholderPage> {
               child: Text('Go to /news/open'),
               color: Colors.green,
               onPressed: () {
-                 Navigator.of(context).pushNamed(Routes.paths[Path.news_open]);
+                 // Navigator.of(context).pushNamed(Routes.paths[Path.news_open]);
               },
             ),
           ],

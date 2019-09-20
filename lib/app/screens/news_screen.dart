@@ -4,6 +4,7 @@ import 'package:good_news_flutter/app/blocs/news_screen_bloc.dart';
 import 'package:good_news_flutter/app/common/list_items_builder.dart';
 import 'package:good_news_flutter/app/common/news_list_item.dart';
 import 'package:good_news_flutter/app/models/News.dart';
+import 'package:good_news_flutter/app/navigation/routes.dart';
 import 'package:provider/provider.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -46,7 +47,15 @@ class NewsScreen extends StatelessWidget {
           snapshot: snapshot,
           itemBuilder: (context, news) => NewsListItem(
             model: news,
-            onTap: (news) => print(news.title), // TODO
+            onTap: (news) {
+              Navigator.push(
+                context,
+                Routes.builders[Routes.paths[Path.news_open]](
+                  context,
+                  news,
+                ),
+              );
+            }, // TODO
             onBookmarkTap: (news) => print(news.title), // TODO
           ),
           onLoadData: bloc.get,

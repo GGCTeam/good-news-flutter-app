@@ -12,16 +12,7 @@ class TabNavigator extends StatelessWidget {
     return Navigator(
       key: Tabs.navigatorKeys[tabItem],
       initialRoute: Routes.rootPaths[tabItem],
-      onGenerateRoute: (routeSettings) {
-        return MaterialPageRoute(
-          settings: RouteSettings(
-            // is used to disable animation when first News screen is appeared.
-            // checking if current name of route is included to root paths.
-            isInitialRoute: Routes.rootPaths.values.contains(routeSettings.name),
-          ),
-          builder: (context) => Routes.builders[routeSettings.name](context),
-        );
-      },
+      onGenerateRoute: (routeSettings) => Routes.builders[routeSettings.name](context, null),
     );
   }
 }
