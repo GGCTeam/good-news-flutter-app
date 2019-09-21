@@ -1,36 +1,28 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:good_news_flutter/app/data/api_service.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 
 class NewsScreenBloc {
   NewsScreenBloc({
-    @required this.api,
     @required this.storage,
   }) {
-    // TODO add data listener to news bookmarks storage
-    // storage.news.stream.listen((news) { print("\n\nFROM NewsScreenBloc: \n\n"); print(news); });
+    storage.news.stream.listen((news) => this.updateWith(news: news));
   }
 
-  final ApiService api;
-  final StorageService storage; // TODO
+  final StorageService storage;
 
   final StreamController<List<News>> _newsController =
       StreamController<List<News>>();
 
   Stream<List<News>> get newsStream => _newsController.stream;
-  List<News> _news = [];
 
   Future<void> get() async {
+    print("\n\nNEWS_SCREEN_BLOC_GEEEET\n\n");
     try {
-      final news = await api.getNews();
-
-      storage.news.save(news);
-      updateWith(news: news);
+      await storage.news.get(newsSources: await storage.newsSources.getFromLocalStorage());
     } catch (e) {
       updateWithError(error: e);
-      // rethrow;
     }
   }
 
@@ -41,9 +33,7 @@ class NewsScreenBloc {
   void updateWith({
     List<News> news,
   }) {
-    _news = news;
-
-    _newsController.add(_news);
+    _newsController.add(news);
   }
 
   void updateWithError({

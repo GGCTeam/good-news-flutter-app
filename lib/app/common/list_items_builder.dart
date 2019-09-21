@@ -9,12 +9,12 @@ class ListItemsBuilder<T> extends StatelessWidget {
     Key key,
     @required this.snapshot,
     @required this.itemBuilder,
-    @required this.onLoadData,
+    this.onRefreshData,
   }) : super(key: key);
 
   final AsyncSnapshot<List<T>> snapshot;
   final ItemWidgetBuilder<T> itemBuilder;
-  final VoidCallback onLoadData;
+  final VoidCallback onRefreshData;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +31,9 @@ class ListItemsBuilder<T> extends StatelessWidget {
         title: "Something went wrong",
         message: "Can't load items right now",
         showRefreshButton: true,
-        onRefreshPressed: onLoadData,
+        onRefreshPressed: onRefreshData ?? () {},
       );
     }
-
-    onLoadData();
 
     return Center(
       child: CircularProgressIndicator(),

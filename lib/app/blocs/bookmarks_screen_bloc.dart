@@ -10,15 +10,24 @@ class BookmarksScreenBloc {
     // here we create listener to storage,
     // so when we receive new values,
     // we update UI state through the BLoC
-    storage.bookmarks.stream.listen((bookmarks) => this.updateWith(bookmarks: bookmarks));
+    storage.bookmarks.stream
+        .listen((bookmarks) => this.updateWith(bookmarks: bookmarks));
   }
 
   final StorageService storage;
 
   final StreamController<List<News>> _bookmarksController =
-  StreamController<List<News>>();
+      StreamController<List<News>>();
 
   Stream<List<News>> get bookmarksStream => _bookmarksController.stream;
+
+  void get() {
+    try {
+      storage.bookmarks.get();
+    } catch (e) {
+      updateWithError(error: e);
+    }
+  }
 
   void removeFromBookmarks(News bookmark) {
     storage.bookmarks.remove(bookmark);

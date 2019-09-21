@@ -3,24 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/blocs/news_screen_bloc.dart';
 import 'package:good_news_flutter/app/common/list_items_builder.dart';
 import 'package:good_news_flutter/app/common/news_list_item.dart';
-import 'package:good_news_flutter/app/data/api_service.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:good_news_flutter/app/navigation/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'dart:async';
 
-class NewsScreen extends StatelessWidget {
+class NewsScreen extends StatefulWidget {
   const NewsScreen({Key key, this.bloc}) : super(key: key);
 
   final NewsScreenBloc bloc;
 
   static Widget create(BuildContext context) {
-    final api = Provider.of<ApiService>(context);
     final storage = Provider.of<StorageService>(context);
 
     return Provider<NewsScreenBloc>(
-      builder: (context) => NewsScreenBloc(api: api, storage: storage),
+      builder: (context) => NewsScreenBloc(storage: storage),
       child: Consumer<NewsScreenBloc>(
         builder: (context, bloc, _) => NewsScreen(bloc: bloc),
       ),
@@ -28,12 +27,26 @@ class NewsScreen extends StatelessWidget {
     );
   }
 
+  @override
+  _NewsScreenState createState() => _NewsScreenState();
+}
+
+class _NewsScreenState extends State<NewsScreen> {
+  @override
+  void initState() {
+    widget.bloc.get();
+
+    super.initState();
+  }
+
   Future<Null> _refresh() async {
-    return await bloc.get();
+    return await widget.bloc.get();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("_build");
+
     return Scaffold(
       appBar: AppBar(
         title: Text('News'),
@@ -47,8 +60,9 @@ class NewsScreen extends StatelessWidget {
   }
 
   Widget _buildContents(BuildContext context) {
+    print("_buildContents");
     return StreamBuilder<List<News>>(
-      stream: bloc.newsStream,
+      stream: widget.bloc.newsStream,
       builder: (context, snapshot) {
         return ListItemsBuilder<News>(
           snapshot: snapshot,
@@ -62,11 +76,11 @@ class NewsScreen extends StatelessWidget {
                   news,
                 ),
               );
-            }, // TODO
-            onBookmarkTap: (news) => bloc.addToBookmarks(news),
+            },
+            onBookmarkTap: (news) => widget.bloc.addToBookmarks(news),
             onShareTap: (news) => Share.share(news.link),
           ),
-          onLoadData: bloc.get,
+          onRefreshData: widget.bloc.get,
         );
       },
     );

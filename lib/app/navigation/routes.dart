@@ -4,6 +4,7 @@ import 'package:good_news_flutter/app/placeholder_page.dart';
 import 'package:good_news_flutter/app/screens/bookmarks_screen.dart';
 import 'package:good_news_flutter/app/screens/news_open_screen.dart';
 import 'package:good_news_flutter/app/screens/news_screen.dart';
+import 'package:good_news_flutter/app/screens/settings_screen.dart';
 
 typedef MaterialPageRouteBuilder<T> = MaterialPageRoute Function(BuildContext context, T data);
 
@@ -47,7 +48,7 @@ class Routes {
       settings: RouteSettings(
         isInitialRoute: true,
       ),
-      builder: (context) => PlaceholderPage("Settings"),
+      builder: (context) => SettingsScreen.create(context),
     ),
 
     paths[Path.news_open]: (context, news) => MaterialPageRoute(

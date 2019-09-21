@@ -12,7 +12,7 @@ class NewsSource {
   final String id;
   final String name;
   final String imageUrl;
-  final List<NewsType> types;
+  List<NewsType> types;
 
   factory NewsSource.fromMap(Map<String, dynamic> data) {
     if (data == null) return null;

@@ -33,7 +33,7 @@ class NewsListItem extends StatelessWidget {
         IconSlideAction(
           color: isBookmarked ? Colors.red : Colors.amber,
           foregroundColor: isBookmarked ? Colors.white : Colors.black,
-          icon: Icons.star_border,
+          icon: isBookmarked ? Icons.star : Icons.star_border,
           onTap: () => onBookmarkTap(model),
         ),
       ],

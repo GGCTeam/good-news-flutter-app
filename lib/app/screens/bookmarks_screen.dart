@@ -9,7 +9,7 @@ import 'package:good_news_flutter/app/navigation/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
-class BookmarksScreen extends StatelessWidget {
+class BookmarksScreen extends StatefulWidget {
   const BookmarksScreen({Key key, this.bloc}) : super(key: key);
 
   final BookmarksScreenBloc bloc;
@@ -27,6 +27,18 @@ class BookmarksScreen extends StatelessWidget {
   }
 
   @override
+  _BookmarksScreenState createState() => _BookmarksScreenState();
+}
+
+class _BookmarksScreenState extends State<BookmarksScreen> {
+  @override
+  void initState() {
+    widget.bloc.get();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +51,7 @@ class BookmarksScreen extends StatelessWidget {
 
   Widget _buildContents(BuildContext context) {
     return StreamBuilder<List<News>>(
-      stream: bloc.bookmarksStream,
+      stream: widget.bloc.bookmarksStream,
       builder: (context, snapshot) {
         return ListItemsBuilder<News>(
           snapshot: snapshot,
@@ -53,12 +65,11 @@ class BookmarksScreen extends StatelessWidget {
                   news,
                 ),
               );
-            }, // TODO
-            onBookmarkTap: (news) => bloc.removeFromBookmarks(news), // TODO
+            },
+            onBookmarkTap: (news) => widget.bloc.removeFromBookmarks(news),
             isBookmarked: true,
             onShareTap: (news) => Share.share(news.link),
           ),
-          onLoadData: () {},
         );
       },
     );
