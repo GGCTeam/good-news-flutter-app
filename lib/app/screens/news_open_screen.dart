@@ -34,7 +34,7 @@ class NewsOpenScreen extends StatefulWidget {
   static MaterialPageRoute pageRoute(BuildContext context, News news) {
     return MaterialPageRoute(
       settings: RouteSettings(
-        isInitialRoute: true,
+        isInitialRoute: false,
       ),
       builder: (context) => NewsOpenScreen.create(context, news),
     );
