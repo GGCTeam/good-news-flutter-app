@@ -34,7 +34,6 @@ class NewsOpenBloc {
   }
 
   void checkIfBookmarked(News news) {
-    print("yesyes ${storage.bookmarks.isBookmarked(news)}");
     updateWith(isBookmarked: storage.bookmarks.isBookmarked(news));
   }
 

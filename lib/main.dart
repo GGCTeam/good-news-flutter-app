@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO :: try to implement Cupertino widgets
-    print("\n\n\n SUPER BUILD \n\n\n");
     return MaterialApp(
       title: 'Good News',
       theme: ThemeData(
@@ -26,13 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-
-MultiProvider(
-        providers: [
-          Provider<StorageService>.value(value: StorageService()),
-        ],
-        child: HomePage(),
-      ),
-
-* */

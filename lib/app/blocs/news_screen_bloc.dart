@@ -18,7 +18,6 @@ class NewsScreenBloc {
   Stream<List<News>> get newsStream => _newsController.stream;
 
   Future<void> get() async {
-    print("\n\nNEWS_SCREEN_BLOC_GEEEET\n\n");
     try {
       await storage.news.get(newsSources: await storage.newsSources.getFromLocalStorage());
     } catch (e) {

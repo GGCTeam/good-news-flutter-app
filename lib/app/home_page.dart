@@ -24,8 +24,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("\n\n BUUUILD \n\n");
-
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =

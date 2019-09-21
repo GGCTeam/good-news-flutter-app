@@ -45,8 +45,6 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("_build");
-
     return Scaffold(
       appBar: AppBar(
         title: Text('News'),
@@ -60,7 +58,6 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   Widget _buildContents(BuildContext context) {
-    print("_buildContents");
     return StreamBuilder<List<News>>(
       stream: widget.bloc.newsStream,
       builder: (context, snapshot) {
