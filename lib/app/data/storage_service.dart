@@ -2,6 +2,7 @@
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:good_news_flutter/app/models/NewsSource.dart';
 import 'package:good_news_flutter/app/models/NewsType.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:rxdart/subjects.dart';
 
 class StorageService {
@@ -37,31 +38,46 @@ class NewsStorage {
 }
 
 class BookmarksStorage {
+  final String storageKey = "bookmarks";
+  LocalStorage storage;
+
   BookmarksStorage() {
-    stream.add(_bookmarks);
+    storage = new LocalStorage('${storageKey}_storage');
+
+    getFromStorage();
   }
 
   List<News> _bookmarks = [];
 
   BehaviorSubject stream = new BehaviorSubject<List<News>>();
 
-  void add(News bookmark) {
-    if (!_bookmarks.contains(bookmark)) {
-      _bookmarks.insert(0, bookmark); // adding to the beginning of the list
-
-      // TODO save to the actual local_storage
-
+  void getFromStorage() async {
+    if (await storage.ready) {
+      List<dynamic> bookmarks = storage.getItem(storageKey) ?? [];
+      _bookmarks = bookmarks.map((b) => News.fromMap(b)).toList();
       stream.add(_bookmarks);
     }
   }
 
-  void remove(News bookmark) {
+  void add(News bookmark) async {
+    if (!_bookmarks.contains(bookmark)) {
+      _bookmarks.insert(0, bookmark); // adding to the beginning of the list
+      stream.add(_bookmarks);
+
+      if (await storage.ready) {
+        storage.setItem(storageKey, _bookmarks.map((b) => b.toMap()).toList());
+      }
+    }
+  }
+
+  void remove(News bookmark) async {
     if (_bookmarks.contains(bookmark)) {
       _bookmarks.remove(bookmark);
-
-      // TODO remove from the actual local_storage
-
       stream.add(_bookmarks);
+
+      if (await storage.ready) {
+        storage.setItem(storageKey, _bookmarks.map((b) => b.toMap()).toList());
+      }
     }
   }
 
