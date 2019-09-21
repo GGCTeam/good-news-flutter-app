@@ -12,7 +12,7 @@ class TabNavigator extends StatelessWidget {
     return Navigator(
       key: Tabs.navigatorKeys[tabItem],
       initialRoute: Routes.rootPaths[tabItem],
-      onGenerateRoute: (routeSettings) => Routes.builders[routeSettings.name](context, null),
+      onGenerateRoute: (routeSettings) => Routes.rootBuilders[routeSettings.name](context),
     );
   }
 }

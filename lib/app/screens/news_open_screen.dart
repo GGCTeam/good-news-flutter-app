@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:good_news_flutter/app/data/storage_service.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:good_news_flutter/app/models/News.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -12,6 +14,30 @@ class NewsOpenScreen extends StatefulWidget {
   }) : super(key: key);
 
   final News model;
+
+  static Widget create(BuildContext context, News news) {
+    final storage = Provider.of<StorageService>(context);
+
+    return NewsOpenScreen(model: news);
+
+//    return Provider<BookmarksScreenBloc>(
+//      builder: (context) => BookmarksScreenBloc(storage: storage),
+//      child: Consumer<BookmarksScreenBloc>(
+//        builder: (context, bloc, _) => BookmarksScreen(bloc: bloc),
+//      ),
+//      dispose: (context, bloc) => bloc.dispose(),
+//    );
+  }
+
+  //     PageRoute TODO
+  static MaterialPageRoute pageRoute(BuildContext context, News news) {
+    return MaterialPageRoute(
+      settings: RouteSettings(
+        isInitialRoute: true,
+      ),
+      builder: (context) => NewsOpenScreen.create(context, news),
+    );
+  }
 
   @override
   _NewsOpenScreenState createState() => _NewsOpenScreenState();

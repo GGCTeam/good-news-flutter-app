@@ -5,7 +5,7 @@ import 'package:good_news_flutter/app/common/list_items_builder.dart';
 import 'package:good_news_flutter/app/common/news_list_item.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
 import 'package:good_news_flutter/app/models/News.dart';
-import 'package:good_news_flutter/app/navigation/routes.dart';
+import 'package:good_news_flutter/app/screens/news_open_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'dart:async';
@@ -71,10 +71,7 @@ class _NewsScreenState extends State<NewsScreen> {
             onTap: (news) {
               Navigator.push(
                 context,
-                Routes.builders[Routes.paths[Path.news_open]](
-                  context,
-                  news,
-                ),
+                NewsOpenScreen.pageRoute(context, news),
               );
             },
             onBookmarkTap: (news) => widget.bloc.addToBookmarks(news),
