@@ -9,14 +9,16 @@ class NewsListItem extends StatelessWidget {
     Key key,
     @required this.model,
     @required this.onTap,
-    @required this.onBookmarkTap,
     @required this.onShareTap,
+    @required this.onBookmarkTap,
+    this.isBookmarked = false,
   }) : super(key: key);
 
   final News model;
   final ValueChanged<News> onTap;
-  final ValueChanged<News> onBookmarkTap;
   final ValueChanged<News> onShareTap;
+  final ValueChanged<News> onBookmarkTap;
+  final bool isBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,8 @@ class NewsListItem extends StatelessWidget {
           onTap: () => onShareTap(model),
         ),
         IconSlideAction(
-          color: Colors.amber,
+          color: isBookmarked ? Colors.red : Colors.amber,
+          foregroundColor: isBookmarked ? Colors.white : Colors.black,
           icon: Icons.star_border,
           onTap: () => onBookmarkTap(model),
         ),

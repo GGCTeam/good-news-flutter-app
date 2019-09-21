@@ -54,7 +54,8 @@ class BookmarksScreen extends StatelessWidget {
                 ),
               );
             }, // TODO
-            onBookmarkTap: (news) => print(news.title), // TODO
+            onBookmarkTap: (news) => bloc.removeFromBookmarks(news), // TODO
+            isBookmarked: true,
             onShareTap: (news) => Share.share(news.link),
           ),
           onLoadData: () {},

@@ -4,7 +4,6 @@ import 'package:good_news_flutter/app/models/NewsSource.dart';
 import 'package:good_news_flutter/app/models/NewsType.dart';
 import 'package:rxdart/subjects.dart';
 
-// NOTE: might be better to separate this class to different classes
 class StorageService {
   NewsStorage news = NewsStorage();
   BookmarksStorage bookmarks = BookmarksStorage();
@@ -47,11 +46,23 @@ class BookmarksStorage {
   BehaviorSubject stream = new BehaviorSubject<List<News>>();
 
   void add(News bookmark) {
-    _bookmarks.insert(0, bookmark); // adding to the beginning of the list
+    if (!_bookmarks.contains(bookmark)) {
+      _bookmarks.insert(0, bookmark); // adding to the beginning of the list
 
-    // TODO save to the actual local_storage
+      // TODO save to the actual local_storage
 
-    stream.add(_bookmarks);
+      stream.add(_bookmarks);
+    }
+  }
+
+  void remove(News bookmark) {
+    if (_bookmarks.contains(bookmark)) {
+      _bookmarks.remove(bookmark);
+
+      // TODO remove from the actual local_storage
+
+      stream.add(_bookmarks);
+    }
   }
 
   void dispose() {

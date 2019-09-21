@@ -20,6 +20,10 @@ class BookmarksScreenBloc {
 
   Stream<List<News>> get bookmarksStream => _bookmarksController.stream;
 
+  void removeFromBookmarks(News bookmark) {
+    storage.bookmarks.remove(bookmark);
+  }
+
   void updateWith({
     List<News> bookmarks,
   }) {
