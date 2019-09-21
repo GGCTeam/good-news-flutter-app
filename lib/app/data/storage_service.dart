@@ -84,7 +84,7 @@ class BookmarksStorage {
   }
 
   void add(News bookmark) {
-    if (!_bookmarks.contains(bookmark)) {
+    if (!bookmarksContain(bookmark)) {
       _bookmarks.insert(0, bookmark); // adding to the beginning of the list
       stream.add(_bookmarks);
 
@@ -93,12 +93,20 @@ class BookmarksStorage {
   }
 
   void remove(News bookmark) {
-    if (_bookmarks.contains(bookmark)) {
-      _bookmarks.remove(bookmark);
+    if (bookmarksContain(bookmark)) {
+      _bookmarks.removeWhere((b) => b.id == bookmark.id);
       stream.add(_bookmarks);
 
       _saveData();
     }
+  }
+
+  bool isBookmarked(News news) {
+    return bookmarksContain(news);
+  }
+
+  bool bookmarksContain(News news) {
+    return _bookmarks.indexWhere((b) => b.id == news.id) >= 0;
   }
 
   void _saveData() async {
