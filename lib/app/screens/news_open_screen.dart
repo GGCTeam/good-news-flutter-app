@@ -94,14 +94,34 @@ class _NewsOpenScreenState extends State<NewsOpenScreen> {
   }
 
   Widget _buildContents() {
-    return Builder(builder: (BuildContext context) {
-      return WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: widget.model.link,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
+    return Center(
+      // this is done to wait till a page will be presented
+      // and then start showing WebView, otherwise it would cause lags
+      child: FutureBuilder(
+        future: widget.bloc.webViewFuture,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            case ConnectionState.done:
+              if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+
+              return Builder(builder: (BuildContext context) {
+                return WebView(
+                  javascriptMode: JavascriptMode.unrestricted,
+                  initialUrl: widget.model.link,
+                  onWebViewCreated: (WebViewController webViewController) {
+                    _controller.complete(webViewController);
+                  },
+                );
+              });
+          }
+          return null;
         },
-      );
-    });
+      ),
+    );
+
   }
 }
