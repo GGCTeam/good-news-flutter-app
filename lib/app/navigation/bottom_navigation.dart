@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/navigation/tabs.dart';
 
+
+// TODO
+// NOT NEEDED COZ LOGIC MOVED TO ``` PLATFORM_TAB_SCAFFOLD.DART ```
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({@required this.currentTab, @required this.onSelectTab});
 

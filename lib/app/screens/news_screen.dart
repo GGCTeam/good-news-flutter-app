@@ -1,10 +1,11 @@
-import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/blocs/news_screen_bloc.dart';
-import 'package:good_news_flutter/app/common/list_items_builder.dart';
 import 'package:good_news_flutter/app/common/news_list_item.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
 import 'package:good_news_flutter/app/models/News.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_list_items_builder.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_page_scaffold.dart';
 import 'package:good_news_flutter/app/screens/news_open_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
@@ -45,15 +46,10 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('News'),
-        elevation: Platform.isIOS ? 0 : 4,
-      ),
-      body: RefreshIndicator(
-        onRefresh: _refresh,
-        child: _buildContents(context),
-      ),
+    return PlatformPageScaffold(
+      title: 'News',
+      onRefresh: _refresh,
+      body: _buildContents(context),
     );
   }
 
@@ -61,14 +57,15 @@ class _NewsScreenState extends State<NewsScreen> {
     return StreamBuilder<List<News>>(
       stream: widget.bloc.newsStream,
       builder: (context, snapshot) {
-        return ListItemsBuilder<News>(
+        return PlatformListItemsBuilder(
           snapshot: snapshot,
-          itemBuilder: (context, news) => NewsListItem(
+          itemBuilder: (context, news, lastItem) => NewsListItem(
             model: news,
+            lastItem: lastItem,
             onTap: (news) {
               Navigator.push(
                 context,
-                NewsOpenScreen.pageRoute(context, news),
+                NewsOpenScreen.pageRoute(context, news, 'News'),
               );
             },
             onBookmarkTap: (news) => widget.bloc.addToBookmarks(news),

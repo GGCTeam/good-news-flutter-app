@@ -6,7 +6,8 @@ import 'package:good_news_flutter/app/screens/news_open_screen.dart';
 import 'package:good_news_flutter/app/screens/news_screen.dart';
 import 'package:good_news_flutter/app/screens/settings_screen.dart';
 
-typedef MaterialPageRouteBuilder = MaterialPageRoute Function(BuildContext context);
+typedef MaterialPageRouteBuilder = MaterialPageRoute Function(
+    BuildContext context);
 
 enum Path {
   news_root,
@@ -31,24 +32,23 @@ class Routes {
 
   static Map<String, MaterialPageRouteBuilder> rootBuilders = {
     paths[Path.news_root]: (context) => MaterialPageRoute(
-      settings: RouteSettings(
-        isInitialRoute: true, // true - appears w/out animation
-      ),
-      builder: (context) => NewsScreen.create(context),
-    ),
-
+          settings: RouteSettings(isInitialRoute: true),
+          // true - appears w/out animation
+          builder: rootScreenBuilders[paths[Path.news_root]],
+        ),
     paths[Path.bookmarks_root]: (context) => MaterialPageRoute(
-      settings: RouteSettings(
-        isInitialRoute: true,
-      ),
-      builder: (context) => BookmarksScreen.create(context),
-    ),
-
+          settings: RouteSettings(isInitialRoute: true),
+          builder: rootScreenBuilders[paths[Path.bookmarks_root]],
+        ),
     paths[Path.settings_root]: (context) => MaterialPageRoute(
-      settings: RouteSettings(
-        isInitialRoute: true,
-      ),
-      builder: (context) => SettingsScreen.create(context),
-    ),
+          settings: RouteSettings(isInitialRoute: true),
+          builder: rootScreenBuilders[paths[Path.settings_root]],
+        ),
+  };
+
+  static Map<String, WidgetBuilder> rootScreenBuilders = {
+    paths[Path.news_root]: (context) => NewsScreen.create(context),
+    paths[Path.bookmarks_root]: (context) => BookmarksScreen.create(context),
+    paths[Path.settings_root]: (context) => SettingsScreen.create(context),
   };
 }

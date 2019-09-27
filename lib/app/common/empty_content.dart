@@ -31,7 +31,7 @@ class EmptyContent extends StatelessWidget {
           if (showRefreshButton && onRefreshPressed != null)
             IconButton(
               iconSize: 44,
-              color: Colors.green,
+              color: Colors.blue,
               icon: Icon(Icons.refresh),
               onPressed: onRefreshPressed,
             )

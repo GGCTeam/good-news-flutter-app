@@ -1,4 +1,7 @@
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem { news, bookmarks, settings }
@@ -13,15 +16,15 @@ class Tabs {
   };
 
   static Map<TabItem, MaterialColor> activeColors = {
-    TabItem.news: Colors.green,
-    TabItem.bookmarks: Colors.green,
-    TabItem.settings: Colors.green,
+    TabItem.news: Colors.blue,
+    TabItem.bookmarks: Colors.blue,
+    TabItem.settings: Colors.blue,
   };
 
   static Map<TabItem, IconData> icons = {
-    TabItem.news: Icons.view_list,
-    TabItem.bookmarks: Icons.star,
-    TabItem.settings: Icons.settings,
+    TabItem.news: Platform.isIOS ? CupertinoIcons.home : Icons.view_list,
+    TabItem.bookmarks: Platform.isIOS ? CupertinoIcons.bookmark : Icons.star,
+    TabItem.settings: Platform.isIOS ? CupertinoIcons.settings : Icons.settings,
   };
 
   static Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {

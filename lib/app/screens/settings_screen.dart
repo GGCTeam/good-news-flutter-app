@@ -1,10 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/blocs/settings_screen_bloc.dart';
-import 'package:good_news_flutter/app/common/list_items_builder.dart';
 import 'package:good_news_flutter/app/common/news_source_list_item.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
+import 'package:good_news_flutter/app/models/NewsSource.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_list_items_builder.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_page_scaffold.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -38,22 +38,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        elevation: Platform.isIOS ? 0 : 4,
-      ),
+    return PlatformPageScaffold(
+      title: 'Settings',
+//      isSliverForIOS: true,
       body: _buildContents(context),
     );
   }
 
   Widget _buildContents(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<List<NewsSource>>(
       stream: widget.bloc.newsSourcesStream,
-      builder: (builder, snapshot) {
-        return ListItemsBuilder(
+      builder: (context, snapshot) {
+        return PlatformListItemsBuilder(
+//          isSliverIOS: true,
           snapshot: snapshot,
-          itemBuilder: (builder, newsSource) => NewsSourceItem(
+          itemBuilder: (builder, newsSource, lastItem) => NewsSourceItem(
             model: newsSource,
             onTypeTap: widget.bloc.newsSourceTypeSelected,
           ),

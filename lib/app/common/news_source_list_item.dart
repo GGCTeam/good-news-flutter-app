@@ -18,47 +18,49 @@ class NewsSourceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Image.network(
-                  '${Constants.baseUrl}${model.imageUrl}',
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.fitWidth,
-                ),
-                SizedBox(width: 8),
-                Text(
-                  model.name,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
-            SingleChildScrollView(
-              padding: EdgeInsets.only(left: 58),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(model.types.length, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ChoiceChip(
-                      selectedColor: Colors.green[400],
-                      labelStyle: TextStyle(color: Colors.white),
-                      selected: model.types[index].selected,
-                      label: Text("${model.types[index].name}"),
-                      onSelected: (selected) => onTypeTap(model, model.types[index], selected),
-                    ),
-                  );
-                },
+    return Material(
+      child: Container(
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Image.network(
+                    '${Constants.baseUrl}${model.imageUrl}',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    model.name,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+              SingleChildScrollView(
+                padding: EdgeInsets.only(left: 58),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(model.types.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ChoiceChip(
+                        selectedColor: Colors.blue[400],
+                        labelStyle: TextStyle(color: Colors.white),
+                        selected: model.types[index].selected,
+                        label: Text("${model.types[index].name}"),
+                        onSelected: (selected) => onTypeTap(model, model.types[index], selected),
+                      ),
+                    );
+                  },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

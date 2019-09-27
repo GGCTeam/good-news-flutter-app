@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:good_news_flutter/app/data/constants.dart';
 import 'package:good_news_flutter/app/models/News.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_values.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_icon_slide_action.dart';
 
 class NewsListItem extends StatelessWidget {
   const NewsListItem({
@@ -11,6 +13,7 @@ class NewsListItem extends StatelessWidget {
     @required this.onTap,
     @required this.onShareTap,
     @required this.onBookmarkTap,
+    @required this.lastItem,
     this.isBookmarked = false,
   }) : super(key: key);
 
@@ -18,38 +21,53 @@ class NewsListItem extends StatelessWidget {
   final ValueChanged<News> onTap;
   final ValueChanged<News> onShareTap;
   final ValueChanged<News> onBookmarkTap;
+  final bool lastItem;
   final bool isBookmarked;
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
+    final Widget row = Slidable(
       actionPane: SlidableDrawerActionPane(),
       secondaryActions: <Widget>[
-        IconSlideAction(
-          color: Colors.indigo,
-          icon: Icons.share,
+        ShareIconSlideAction(
           onTap: () => onShareTap(model),
         ),
-        IconSlideAction(
-          color: isBookmarked ? Colors.red : Colors.amber,
-          foregroundColor: isBookmarked ? Colors.white : Colors.black,
-          icon: isBookmarked ? Icons.star : Icons.star_border,
+        BookmarkIconSlideAction(
+          isBookmarked: isBookmarked,
           onTap: () => onBookmarkTap(model),
         ),
       ],
-      child: InkWell(
-        onTap: () => onTap(model),
-        child: Padding(
-          padding: EdgeInsets.all(4),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildNewsSourceImageAndNewsType(),
-              _buildContents(),
-            ],
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          splashColor: PlatformValues.splashColor,
+          onTap: () => onTap(model),
+          child: Padding(
+            padding: EdgeInsets.all(4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildNewsSourceImageAndNewsType(),
+                _buildContents(),
+              ],
+            ),
           ),
         ),
       ),
+    );
+
+    if (lastItem) {
+      return row;
+    }
+
+    return Column(
+      children: <Widget>[
+        row,
+        Container(
+          height: 1.0,
+          color: const Color(0xFFD9D9D9),
+        ),
+      ],
     );
   }
 

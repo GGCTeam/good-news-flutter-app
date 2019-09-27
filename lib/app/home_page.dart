@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/navigation/tab_navigator.dart';
+import 'package:good_news_flutter/app/platform_specific/platform_tab_scaffold.dart';
 
 import 'navigation/bottom_navigation.dart';
 import 'navigation/tabs.dart';
@@ -40,25 +41,10 @@ class _HomePageState extends State<HomePage> {
         // let system handle back button if we're on the first route
         return isFirstRouteInCurrentTab;
       },
-      child: Scaffold(
-        body: Stack(children: <Widget>[
-          _buildOffstageNavigator(TabItem.news),
-          _buildOffstageNavigator(TabItem.bookmarks),
-          _buildOffstageNavigator(TabItem.settings),
-        ]),
-        bottomNavigationBar: BottomNavigation(
-          currentTab: _currentTab,
-          onSelectTab: _selectTab,
-        ),
+      child: PlatformTabScaffold(
+        currentTab: _currentTab,
+        onSelectTab: _selectTab,
       ),
-    );
-  }
-
-  Widget _buildOffstageNavigator(TabItem tabItem) {
-    return Offstage(
-      offstage: _currentTab != tabItem,
-      child: TabNavigator(tabItem: tabItem),
-      // child: _correctTabNavigator(tabItem),
     );
   }
 }

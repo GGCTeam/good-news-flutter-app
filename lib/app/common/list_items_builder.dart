@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'empty_content.dart';
 
-typedef ItemWidgetBuilder<T> = Widget Function(BuildContext context, T item);
+// TODO
+// NOT NEEDED COZ LOGIC MOVED TO ``` PLATFORM_LIST_ITEMS_BUILDER.DART ```
+
+typedef ItemWidgetBuilder<T> = Widget Function(BuildContext context, T item, bool lastItem);
 
 class ListItemsBuilder<T> extends StatelessWidget {
   const ListItemsBuilder({
@@ -24,33 +28,51 @@ class ListItemsBuilder<T> extends StatelessWidget {
       if (items.isNotEmpty) {
         return _buildList(items);
       } else {
-        return EmptyContent();
+        return SliverToBoxAdapter(child: EmptyContent());
       }
     } else if (snapshot.hasError) {
-      return EmptyContent(
-        title: "Something went wrong",
-        message: "Can't load items right now",
-        showRefreshButton: true,
-        onRefreshPressed: onRefreshData ?? () {},
+      return SliverToBoxAdapter(
+        child: EmptyContent(
+          title: "Something went wrong",
+          message: "Can't load items right now",
+          showRefreshButton: true,
+          onRefreshPressed: onRefreshData ?? () {},
+        ),
       );
     }
 
-    return Center(
-      child: CircularProgressIndicator(),
+    return SliverToBoxAdapter(
+      child: CupertinoActivityIndicator(
+        animating: true,
+      ),
     );
+//    return Center(
+//      child: CircularProgressIndicator(),
+//    );
   }
 
   Widget _buildList(List<T> items) {
-    return ListView.separated(
-      itemCount: items.length + 2,
-      separatorBuilder: (context, index) => Divider(height: 0.5),
-      itemBuilder: (context, index) {
-        if (index == 0 || index == items.length + 1) {
-          return Container();
-        }
-
-        return itemBuilder(context, items[index - 1]);
-      },
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) => itemBuilder(
+          context,
+          items[index],
+          index == items.length - 1,
+        ),
+        childCount: items.length,
+      ),
     );
+
+//    return ListView.separated(
+//      itemCount: items.length + 2,
+//      separatorBuilder: (context, index) => Divider(height: 0.5),
+//      itemBuilder: (context, index) {
+//        if (index == 0 || index == items.length + 1) {
+//          return Container();
+//        }
+//
+//        return itemBuilder(context, items[index - 1]);
+//      },
+//    );
   }
 }
