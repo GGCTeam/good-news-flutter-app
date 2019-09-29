@@ -50,9 +50,9 @@ class PlatformListItemsBuilder<T> extends PlatformWidget {
     }
 
     if (isSliverIOS)
-      return SliverToBoxAdapter(child: PlatformRefreshingIndicator());
+      return SliverToBoxAdapter(child: Center(child: PlatformRefreshingIndicator()));
 
-    return PlatformRefreshingIndicator();
+    return Center(child: PlatformRefreshingIndicator());
   }
 
   @override

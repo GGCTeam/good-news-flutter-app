@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 class PlatformValues {
   PlatformValues._();
 
-  static Color splashColor = Platform.isIOS ? Colors.transparent : null;
+  // static Color splashColor = Platform.isIOS ? Colors.transparent : null;
 
   static PageRoute platformPageRoute({bool isInitialRoute, WidgetBuilder builder}) {
-    if (Platform.isIOS) {
-      return CupertinoPageRoute(
-        settings: RouteSettings(
-          isInitialRoute: isInitialRoute,
-        ),
-        builder: builder,
-      );
-    }
+//    if (Platform.isIOS) {
+//      return CupertinoPageRoute(
+//        settings: RouteSettings(
+//          isInitialRoute: isInitialRoute,
+//        ),
+//        builder: builder,
+//      );
+//    }
 
     return MaterialPageRoute(
       settings: RouteSettings(

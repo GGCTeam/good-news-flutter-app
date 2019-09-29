@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_news_flutter/app/data/storage_service.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       androidThemeData: ThemeData(
         primarySwatch: Colors.green,
+        splashColor: Platform.isIOS ? Colors.transparent : null,
       ),
       home: Provider<StorageService>(
         builder: (context) => StorageService(),
