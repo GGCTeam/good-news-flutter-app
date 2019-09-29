@@ -16,9 +16,9 @@ class Tabs {
   };
 
   static Map<TabItem, MaterialColor> activeColors = {
-    TabItem.news: Colors.blue,
-    TabItem.bookmarks: Colors.blue,
-    TabItem.settings: Colors.blue,
+    TabItem.news: Colors.green,
+    TabItem.bookmarks: Colors.green,
+    TabItem.settings: Colors.green,
   };
 
   static Map<TabItem, IconData> icons = {

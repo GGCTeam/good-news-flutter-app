@@ -12,6 +12,7 @@ abstract class PlatformWidget extends StatelessWidget {
     if (Platform.isIOS) {
       return buildCupertinoWidget(context);
     }
+
     return buildMaterialWidget(context);
   }
 }

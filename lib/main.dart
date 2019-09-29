@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       iosThemeData: CupertinoThemeData(
       ),
       androidThemeData: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: Provider<StorageService>(
         builder: (context) => StorageService(),

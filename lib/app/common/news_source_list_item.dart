@@ -48,7 +48,7 @@ class NewsSourceItem extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: ChoiceChip(
-                        selectedColor: Colors.blue[400],
+                        selectedColor: Colors.green[400],
                         labelStyle: TextStyle(color: Colors.white),
                         selected: model.types[index].selected,
                         label: Text("${model.types[index].name}"),

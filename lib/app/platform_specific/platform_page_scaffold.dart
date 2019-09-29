@@ -23,6 +23,24 @@ class PlatformPageScaffold extends PlatformWidget {
 
   @override
   Widget buildCupertinoWidget(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        actions: actionsIOS,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
+      body: onRefresh != null
+          ? RefreshIndicator(
+        onRefresh: onRefresh,
+        child: body,
+      )
+          : body,
+    );
+
+    // NOTE
+    // it is still not made good for iOS, for ex. animations, navigation bar transition etc.
+    /*
     if (!isSliverForIOS) {
       return Material(
         child: CupertinoPageScaffold(
@@ -57,6 +75,7 @@ class PlatformPageScaffold extends PlatformWidget {
         ),
       ],
     );
+    */
   }
 
   @override

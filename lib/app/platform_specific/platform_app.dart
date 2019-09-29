@@ -32,10 +32,10 @@ class PlatformApp extends PlatformWidget {
       home: home,
     );
 
-    return CupertinoApp(
-      title: title,
-      theme: iosThemeData,
-      home: home,
-    );
+//    return CupertinoApp(
+//      title: title,
+//      theme: iosThemeData,
+//      home: home,
+//    );
   }
 }

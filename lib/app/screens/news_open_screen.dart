@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:good_news_flutter/app/blocs/news_open_bloc.dart';
@@ -71,7 +70,7 @@ class _NewsOpenScreenState extends State<NewsOpenScreen> {
       actionsIOS: <Widget>[
         CupertinoButton(
           padding: EdgeInsets.zero,
-          child: const Icon(CupertinoIcons.share),
+          child: const Icon(CupertinoIcons.share, color: Colors.white),
           onPressed: () => Share.share(widget.model.link),
         ),
         StreamBuilder(
@@ -83,8 +82,8 @@ class _NewsOpenScreenState extends State<NewsOpenScreen> {
               return CupertinoButton(
                 padding: EdgeInsets.zero,
                 child: isBookmarked
-                    ? Icon(CupertinoIcons.bookmark_solid)
-                    : Icon(CupertinoIcons.bookmark),
+                    ? Icon(CupertinoIcons.bookmark_solid, color: Colors.white)
+                    : Icon(CupertinoIcons.bookmark, color: Colors.white),
                 onPressed: isBookmarked
                     ? () => widget.bloc.removeFromBookmarks(widget.model)
                     : () => widget.bloc.addToBookmarks(widget.model),
@@ -93,7 +92,7 @@ class _NewsOpenScreenState extends State<NewsOpenScreen> {
 
             return CupertinoButton(
               padding: EdgeInsets.zero,
-              child: Icon(CupertinoIcons.bookmark),
+              child: Icon(CupertinoIcons.bookmark, color: Colors.white),
               onPressed: () {},
             );
           },
