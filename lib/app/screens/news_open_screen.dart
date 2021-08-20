@@ -43,6 +43,7 @@ class NewsOpenScreen extends StatefulWidget {
   static PageRoute pageRoute(BuildContext context, News news, String previousPageTitle) {
     return PlatformValues.platformPageRoute(
       isInitialRoute: false,
+      isFullscreenDialog: true,
       builder: (context) => NewsOpenScreen.create(context, news, previousPageTitle),
     );
   }

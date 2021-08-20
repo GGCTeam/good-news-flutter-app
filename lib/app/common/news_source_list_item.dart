@@ -44,18 +44,21 @@ class NewsSourceItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 58),
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(model.types.length, (index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: ChoiceChip(
-                        selectedColor: Colors.green[400],
-                        labelStyle: TextStyle(color: Colors.white),
-                        selected: model.types[index].selected,
-                        label: Text("${model.types[index].name}"),
-                        onSelected: (selected) => onTypeTap(model, model.types[index], selected),
-                      ),
-                    );
-                  },
+                  children: List.generate(
+                    model.types.length,
+                    (index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ChoiceChip(
+                          selectedColor: Colors.green[400],
+                          labelStyle: TextStyle(color: Colors.white),
+                          selected: model.types[index].selected,
+                          label: Text("${model.types[index].name}"),
+                          onSelected: (selected) =>
+                              onTypeTap(model, model.types[index], selected),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

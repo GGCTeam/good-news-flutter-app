@@ -50,6 +50,7 @@ class _NewsScreenState extends State<NewsScreen> {
       title: 'News',
       onRefresh: _refresh,
       body: _buildContents(context),
+//      isSliverForIOS: true,
     );
   }
 
@@ -72,6 +73,7 @@ class _NewsScreenState extends State<NewsScreen> {
             onShareTap: (news) => Share.share(news.link),
           ),
           onRefreshData: widget.bloc.get,
+//          isSliverIOS: true,
         );
       },
     );

@@ -7,7 +7,7 @@ class PlatformValues {
 
   // static Color splashColor = Platform.isIOS ? Colors.transparent : null;
 
-  static PageRoute platformPageRoute({bool isInitialRoute, WidgetBuilder builder}) {
+  static PageRoute platformPageRoute({bool isInitialRoute, WidgetBuilder builder, bool isFullscreenDialog = false}) {
 //    if (Platform.isIOS) {
 //      return CupertinoPageRoute(
 //        settings: RouteSettings(
@@ -21,6 +21,7 @@ class PlatformValues {
       settings: RouteSettings(
         isInitialRoute: isInitialRoute,
       ),
+      fullscreenDialog: isFullscreenDialog,
       builder: builder,
     );
   }

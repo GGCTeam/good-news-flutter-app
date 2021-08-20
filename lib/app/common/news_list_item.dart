@@ -37,16 +37,18 @@ class NewsListItem extends StatelessWidget {
           onTap: () => onBookmarkTap(model),
         ),
       ],
-      child: InkWell(
-        onTap: () => onTap(model),
-        child: Padding(
-          padding: EdgeInsets.all(4),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildNewsSourceImageAndNewsType(),
-              _buildContents(),
-            ],
+      child: Material(
+        child: InkWell(
+          onTap: () => onTap(model),
+          child: Padding(
+            padding: EdgeInsets.all(4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildNewsSourceImageAndNewsType(),
+                _buildContents(),
+              ],
+            ),
           ),
         ),
       ),

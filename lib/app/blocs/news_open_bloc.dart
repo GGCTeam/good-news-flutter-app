@@ -20,7 +20,7 @@ class NewsOpenBloc {
   final News news;
 
   final BehaviorSubject stream = new BehaviorSubject<bool>();
-  final Future<bool> webViewFuture = new Future.delayed(Duration(milliseconds: 500), () => true);
+  Future<bool> webViewFuture = new Future.delayed(Duration(milliseconds: 300), () => true);
 
   void addToBookmarks(News news) {
     storage.bookmarks.add(news);

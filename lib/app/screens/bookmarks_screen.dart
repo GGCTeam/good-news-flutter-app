@@ -43,6 +43,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
     return PlatformPageScaffold(
       title: 'Bookmarks',
       body: _buildContents(context),
+//      isSliverForIOS: true,
     );
   }
 
@@ -65,6 +66,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
             onBookmarkTap: (news) => widget.bloc.removeFromBookmarks(news),
             onShareTap: (news) => Share.share(news.link),
           ),
+//          isSliverIOS: true,
         );
       },
     );
